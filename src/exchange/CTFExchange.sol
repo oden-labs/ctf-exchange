@@ -58,7 +58,7 @@ contract CTFExchange is
     /// @notice Fills an order
     /// @param order        - The order to be filled
     /// @param fillAmount   - The amount to be filled, always in terms of the maker amount
-    function fillOrder(Order memory order, uint256 fillAmount) external nonReentrant onlyOperator notPaused {
+    function fillOrder(Order memory order, uint256 fillAmount) external nonReentrant notPaused {
         _fillOrder(order, fillAmount, msg.sender);
     }
 
@@ -68,7 +68,6 @@ contract CTFExchange is
     function fillOrders(Order[] memory orders, uint256[] memory fillAmounts)
         external
         nonReentrant
-        onlyOperator
         notPaused
     {
         _fillOrders(orders, fillAmounts, msg.sender);
@@ -84,7 +83,7 @@ contract CTFExchange is
         Order[] memory makerOrders,
         uint256 takerFillAmount,
         uint256[] memory makerFillAmounts
-    ) external nonReentrant onlyOperator notPaused {
+    ) external nonReentrant notPaused {
         _matchOrders(takerOrder, makerOrders, takerFillAmount, makerFillAmounts);
     }
 
